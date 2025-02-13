@@ -1,5 +1,5 @@
 <h2 align="center">
- # Desafio Alura - Screenmatch SprintBoot
+Desafio Alura - Screenmatch SprintBoot
 </h2>
 
 ![](https://cdn1.gnarususercontent.com.br/1/795715/2b32d8ef-25d3-42cc-9893-4b178120a0b0.png)
