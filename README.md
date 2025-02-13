@@ -1,4 +1,4 @@
-﻿# Screenmatch-SpringBoot
+﻿# Desafio Alura - Screenmatch SprintBoot
 
 ![](src/assets/screen.png)
 
