@@ -1,8 +1,10 @@
 package br.senai.screenmatch.principal;
 
 import br.senai.screenmatch.model.*;
+import br.senai.screenmatch.repository.SerieRepository;
 import br.senai.screenmatch.service.ConsumoApi;
 import br.senai.screenmatch.service.ConverterDados;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,11 @@ public class Principal {
     private final String ENDERECO_URL = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=ae96eb08";
     private List<DadosSerie> dadosSeries = new ArrayList<>();
+    private SerieRepository repository;
+
+    public Principal(SerieRepository repository) {
+        this.repository = repository;
+    }
 
     public void exibeMenu() {
         var opcao = -1;
@@ -55,7 +62,9 @@ public class Principal {
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
-        dadosSeries.add(dados);
+        Serie serie = new Serie(dados);
+        //dadosSeries.add(dados);
+        repository.save(serie);
         System.out.println(dados);
     }
 
@@ -80,10 +89,8 @@ public class Principal {
     }
 
     private void listarSeriesBuscadas() {
-        List<Serie> series = new ArrayList<>();
-        series = dadosSeries.stream()
-                        .map(d -> new Serie(d))
-                                .collect(Collectors.toList());
+
+        List<Serie> series = repository.findAll();
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);
